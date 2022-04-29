@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch} from "react-redux";
-import { authUser } from "../store/userReducer";
+import { fetchAuth  } from "../store/userSlice";
 
 import Container from "@mui/material/Container"
 import Card from "@mui/material/Card";
@@ -45,17 +46,25 @@ const styles = {
 
 export default function SignIn() {
 
-  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+
   const [token, setToken] = useState('');
 
-  const isAuth = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(authUser({'token': token}));
-    console.log('isauth2', isAuth);
+    dispatch(fetchAuth(token));
   };
+
+  useEffect(() => {
+    
+    const isAuth = user.isAuth;
+    if (isAuth === true) {
+      navigate("/");
+    }
+  }, [user])
 
   return (
     <Container sx={styles.container}>
@@ -63,14 +72,6 @@ export default function SignIn() {
         <img src={LabelflowLogo} style={styles.logo} alt="Labelflow Logo" />
 
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <TextField
-            required
-            label="Email"
-            variant="outlined"
-            fullWidth
-            onChange={(e) => setEmail(e.target.value)}
-            sx={styles.field} />
-
           <TextField
             required
             label="Token"

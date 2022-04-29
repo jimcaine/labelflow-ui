@@ -1,34 +1,32 @@
-import {
-  ThemeProvider as MuiThemeProvider,
-  createTheme
-} from "@mui/material";
-import { ThemeProvider } from "@emotion/react";
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import SignIn from "./pages/SignIn";
-import MainPage from "./pages/Main";
-
-const theme = createTheme({})
+import MainLayout from "./components/MainLayout";
+import { routes } from "./routes";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
 
 function App() {
 
   const { isAuth } = useSelector(state => state.user);
 
-  const renderPage = () => {
-    if (isAuth) {
-      return <MainPage />
+  const renderRoute = (route) => {
+    if (route.authRequired === true && isAuth === false) {
+      return <Route key={route.path} path={route.path} element={<Navigate to="/signin" />} />
     } else {
-      return <SignIn />
+      return <Route key={route.path} path={route.path} element={route.component} />
     }
-  }
+  };
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        {renderPage()}
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <MainLayout>
+          <Routes>
+            {routes.map((route) => renderRoute(route))}
+          </Routes>
+        </MainLayout>
+      </Router>
+    </ThemeProvider>
   );
 }
 
