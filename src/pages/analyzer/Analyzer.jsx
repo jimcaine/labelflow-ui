@@ -7,6 +7,7 @@ import { ReactTabulator } from 'react-tabulator';
 
 import { getAnalyzerData } from '../../store/analyzerSlice';
 
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Accordion from '@mui/material/Accordion';
@@ -74,7 +75,7 @@ export default function Analyzer() {
   };
 
   return (
-    <div>
+    <Container sx={{marginBottom: "100px"}}>
       <Typography variant="h3">
         Analyzer
       </Typography>
@@ -129,6 +130,6 @@ export default function Analyzer() {
       <TabulatorTable
         columns={dataColumns}
         data={data} />
-    </div>
+    </Container>
   )
 }

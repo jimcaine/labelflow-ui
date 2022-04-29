@@ -9,6 +9,7 @@ export default function FilterValue({ filterId }) {
   const filters = useSelector((state) => state.analyzer.data.filters);
   const dataSource = useSelector((state) => state.analyzer.data.dataSource);
   const filter = filters[filterId];
+  const filterField = filter.field;
   const filterOperator = filter.operator;
 
   const handleChange = (e) => {
@@ -18,8 +19,11 @@ export default function FilterValue({ filterId }) {
     dispatch(setFilters(newFilters));
   };
 
-  if (filterOperator === "=") {
-    const filterVls = ["sport", "entertainment"]
+  const filterVls = dataSource.fields
+    .filter((ds) => ds.field_nm === filterField)[0].vls;
+
+  if (filterOperator === "=" && filterVls !== null) {
+
     return (
       <Select
         labelId="demo-simple-select-label"

@@ -23,9 +23,9 @@ export default function AnalyzerFilters() {
 
   const handleAddFilter = () => {
     const filter = {
-      field: dataSourceFields[0],
-      operator: '=',
-      vl: 'sport'
+      field: dataSourceFields[0].field_nm,
+      operator: 'contains',
+      vl: ''
     };
     dispatch(setFilters([...filters, filter]));
     console.log(filters);

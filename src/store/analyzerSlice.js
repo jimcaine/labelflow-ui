@@ -13,8 +13,15 @@ const initialState = {
     dataSource: {
       id: "bbc",
       fields: [
-        "Text",
-        "Category"
+        {
+          "field_nm": "Category",
+          "type": "categorical",
+          "vls": ["sport", "tech", "business", "politics", "entertainment"]
+        },
+        {
+          "field_nm": "Text",
+          "type": "text"
+        },        
       ]
     }
   },
