@@ -19,7 +19,7 @@ export default function FilterValue({ filterId }) {
   };
 
   if (filterOperator === "=") {
-    const filterVls = ["sports", "entertainment"]
+    const filterVls = ["sport", "entertainment"]
     return (
       <Select
         labelId="demo-simple-select-label"

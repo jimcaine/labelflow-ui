@@ -1,12 +1,19 @@
-import Typography from '@mui/material/Typography';
+import { useSelector, useDispatch } from 'react-redux';
+import { setDataSource } from '../../../store/analyzerSlice';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
+export default function AnalyzerScope() {
 
-export default function AnalyzerScope({ scope, setScope }) {
+  const dispatch = useDispatch();
+  const dataSource = useSelector((state) => state.analyzer.data.dataSource);
+
+  const handleDataSourceChange = (e) => {
+    dispatch(setDataSource(e.target.value));
+  };
 
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -15,9 +22,9 @@ export default function AnalyzerScope({ scope, setScope }) {
         <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={scope.dataSourceId}
-            label="Age"
-            onChange={(e) => setScope({...scope, dataSourceId: e.target.value})}
+            value={dataSource.id}
+            label="Data Source"
+            onChange={ (e) => handleDataSourceChange(e) }
           >
           <MenuItem value="bbc">BBC</MenuItem>
           <MenuItem value="bloomberg">Bloomberg</MenuItem>

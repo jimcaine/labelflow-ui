@@ -8,11 +8,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-
 import FilterField from './FilterField';
 import FilterOperator from './FilterOperator';
 import FilterValue from './FilterValue';
@@ -24,16 +19,13 @@ export default function AnalyzerFilters() {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.analyzer.data.filters);
   const dataSource = useSelector((state) => state.analyzer.data.dataSource);
-  console.log(filters);
-  // dispatch(setFilters('test'));
-
-  // const setFilters = () => dispatch(setFilters(filters));
+  const dataSourceFields = dataSource.fields;
 
   const handleAddFilter = () => {
     const filter = {
-      field: 'Category',
+      field: dataSourceFields[0],
       operator: '=',
-      vl: 'sports'
+      vl: 'sport'
     };
     dispatch(setFilters([...filters, filter]));
     console.log(filters);

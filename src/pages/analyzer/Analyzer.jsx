@@ -8,15 +8,13 @@ import { ReactTabulator } from 'react-tabulator';
 import { getAnalyzerData } from '../../store/analyzerSlice';
 
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-
-import AnalyzerScope from './AnalyzerScope';
+import AnalyzerScope from './scope/AnalyzerScope';
 import AnalyzerFilters from './filters/AnalyzerFilters';
 
 export default function Analyzer() {
@@ -26,6 +24,8 @@ export default function Analyzer() {
   const data = useSelector((state) => state.analyzer.data.data);
   const dataColumns = useSelector((state) => state.analyzer.data.cols);
   const dataStatus = useSelector((state) => state.analyzer.status);
+  const filters = useSelector((state) => state.analyzer.data.filters);
+  const analyzerSlice = useSelector((state) => state.analyzer);
 
   // state
   const [scope, setScope] = useState({
@@ -37,7 +37,7 @@ export default function Analyzer() {
 
   // click events
   const handleLoadDataClick = () => {
-    dispatch(getAnalyzerData());
+    dispatch(getAnalyzerData(filters));
   };
 
   // table handlers
@@ -78,6 +78,7 @@ export default function Analyzer() {
       <Typography variant="h3">
         Analyzer
       </Typography>
+      <Button onClick={() => console.log(analyzerSlice)}>Log State</Button>
       <hr/>
 
       {/* scope */}
