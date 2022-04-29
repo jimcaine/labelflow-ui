@@ -22,7 +22,7 @@ const initialState = {
   error: null,
 };
 
-export const getAnalyzerData = createAsyncThunk('/extract', async () => {
+export const getAnalyzerData = createAsyncThunk('analyzer/data/get', async () => {
   const endpoint = 'extract';
   const url = baseUrl + endpoint;
   const payload = {
@@ -33,13 +33,16 @@ export const getAnalyzerData = createAsyncThunk('/extract', async () => {
   return response.data;
 });
 
+// export const setFilters = createAsyncThunk('analyzer/filters', async (filters) => {
+//   return filters;
+// });
+
 const analyzerSlice = createSlice({
   name: 'analyzer',
   initialState: initialState,
   reducers: {
     setFilters(state, action) {
-      console.log(action);
-      state.data.filters = action.payload.filters;
+      state.data.filters = action.payload;
     }
   },
   extraReducers: builder => {
@@ -49,25 +52,12 @@ const analyzerSlice = createSlice({
       })
       .addCase(getAnalyzerData.fulfilled, (state, action) => {
         const success = action.payload.success;
-
         const data = action.payload.data;
         const dataColumns = [
           {title:"Entity ID", field:"ArticleId"},
           {title:"Text", field:"Text"},
           {title:"Category", field:"Category"}
         ];
-
-
-        // const data = [
-        //   {id: 0, text: "da bears", category: "sports"},
-        //   {id: 5, text: "da bulls", category: "sports"},
-        // ];
-
-        // const dataColumns = [
-        //   {title:"Entity ID", field:"id"},
-        //   {title:"Text", field:"text"},
-        //   {title:"Category", field:"category"}
-        // ];
 
         state.data.data = data;
         state.data.cols = dataColumns;
@@ -79,5 +69,7 @@ const analyzerSlice = createSlice({
       })
   }
 });
+
+export const { setFilters } = analyzerSlice.actions;
 
 export default analyzerSlice.reducer;

@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 import AnalyzerScope from './AnalyzerScope';
-import AnalyzerFilters from './AnalyzerFilters';
+import AnalyzerFilters from './filters/AnalyzerFilters';
 
 export default function Analyzer() {
 
@@ -32,7 +32,6 @@ export default function Analyzer() {
     dataSourceId: "bbc",
   });
 
-  const [filters, setFilters] = useState([]);
   const [activeLabel, setActiveLabel] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -105,7 +104,7 @@ export default function Analyzer() {
           <Typography>Filters</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <AnalyzerFilters filters={filters} setFilters={setFilters} />
+          <AnalyzerFilters />
         </AccordionDetails>
       </Accordion>
 
