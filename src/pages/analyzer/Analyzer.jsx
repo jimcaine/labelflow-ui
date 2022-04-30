@@ -17,61 +17,24 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import AnalyzerScope from './scope/AnalyzerScope';
 import AnalyzerFilters from './filters/AnalyzerFilters';
+import AnalyzerValidations from './validations/AnalyzerValidations';
+import AnalyzerData from './data/AnalyzerData';
 
 export default function Analyzer() {
 
   // store
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.analyzer.data.data);
-  const dataColumns = useSelector((state) => state.analyzer.data.cols);
-  const dataStatus = useSelector((state) => state.analyzer.status);
-  const filters = useSelector((state) => state.analyzer.data.filters);
   const analyzerSlice = useSelector((state) => state.analyzer);
-
-  // state
-  const [scope, setScope] = useState({
-    dataSourceId: "bbc",
-  });
+  const dataRows = analyzerSlice.data.data.rows;
+  const dataColumns = analyzerSlice.data.data.cols;
+  const filters = analyzerSlice.data.filters;
+  const selectedItems = analyzerSlice.data.selectedItems;
 
   const [activeLabel, setActiveLabel] = useState('');
-  const [selectedItems, setSelectedItems] = useState([]);
 
   // click events
   const handleLoadDataClick = () => {
     dispatch(getAnalyzerData(filters));
-  };
-
-  // table handlers
-  const handleRowClick = (e, row) => {
-    console.log(e, row);
-  }
-
-  // form handlers
-  const handleDataSourceChange = (e) => {
-    console.log(e);
-  }
-
-  // iniialize page
-
-  // components
-  const TabulatorTable = ({ columns, data }) => {
-    if (dataStatus === 'idle') {
-      return (
-        <div></div>
-      )
-    } else if (dataStatus === 'loading') {
-      return (
-        <h1>Loading data...</h1>
-      )
-    } else {
-      let tabulatorCols = JSON.parse(JSON.stringify(columns));
-      let tabulatorData = JSON.parse(JSON.stringify(data));
-      return (
-        <ReactTabulator
-          columns={tabulatorCols}
-          data={tabulatorData} />
-      )
-    }
   };
 
   return (
@@ -92,7 +55,7 @@ export default function Analyzer() {
           <Typography>Scope</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <AnalyzerScope scope={scope} setScope={setScope} />
+          <AnalyzerScope  />
         </AccordionDetails>
       </Accordion>
 
@@ -120,16 +83,26 @@ export default function Analyzer() {
           <Typography>Validations</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <div></div>
+          <AnalyzerValidations />
         </AccordionDetails>
       </Accordion>
 
       {/* data */}
-      <hr/>
-      <Button onClick={() => handleLoadDataClick() }>Load Data</Button>
-      <TabulatorTable
-        columns={dataColumns}
-        data={data} />
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="analyzer-data"
+          id="analyzer-data"
+        >
+          <Typography>Data</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Button onClick={() => handleLoadDataClick() }>Load Data</Button>
+          <AnalyzerData columns={dataColumns} rows={dataRows} />
+        </AccordionDetails>
+      </Accordion>
+
     </Container>
   )
 }

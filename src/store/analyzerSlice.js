@@ -7,9 +7,12 @@ const headers = { headers: {"LFML-API-KEY": token}}
 
 const initialState = {
   data: {
-    data: [{"pending": "true"}],
-    cols: [{title: "unloaded", field: "pending"}],
+    data: {
+      rows: [],
+      cols: [],
+    },
     filters: [],
+    selectedItems: [],
     dataSource: {
       id: "bbc",
       fields: [
@@ -55,6 +58,9 @@ const analyzerSlice = createSlice({
     setFilters(state, action) {
       state.data.filters = action.payload;
     },
+    setSelectedItems(state, action) {
+      state.data.selectedItems = action.payload;
+    }
   },
   extraReducers: builder => {
     builder
@@ -65,13 +71,15 @@ const analyzerSlice = createSlice({
         const success = action.payload.success;
         const data = action.payload.data;
         const dataColumns = [
-          {title:"Entity ID", field:"ArticleId"},
-          {title:"Text", field:"Text"},
-          {title:"Category", field:"Category"}
+          {headerName:"Entity ID", field:"ArticleId"},
+          {headerName:"Text", field:"Text", width: 600},
+          {headerName:"Category", field:"Category"}
         ];
 
-        state.data.data = data;
-        state.data.cols = dataColumns;
+        state.data.data = {
+          'rows': data,
+          'cols': dataColumns,
+        }
         state.status = 'succeeded';
       })
       .addCase(getAnalyzerData.rejected, (state, action) => {
@@ -85,6 +93,6 @@ const analyzerSlice = createSlice({
   }
 });
 
-export const { setFilters } = analyzerSlice.actions;
+export const { setFilters, setSelectedItems } = analyzerSlice.actions;
 
 export default analyzerSlice.reducer;

@@ -28,15 +28,11 @@ export default function AnalyzerFilters() {
       vl: ''
     };
     dispatch(setFilters([...filters, filter]));
-    console.log(filters);
   };
 
-  const handleRemoveFilter = (filterId) => {
-    dispatch(setFilters([...filters.slice(0, filterId), ...filters.slice(filterId+1)]));
-  };
 
   const handleAddRules = () => {
-    console.log(filters);
+    console.log('Adding rules', filters);
   }
 
   return (
