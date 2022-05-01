@@ -10,7 +10,7 @@ export default function DataSource() {
 
   return (
     <div>
-      <Typography variant="h3">
+      <Typography variant="h1">
         Data Source: {dataSourceName}
       </Typography>
       <BarChart />

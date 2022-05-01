@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { useDispatch } from 'react-redux';
-import { setSelectedItems } from '../../../store/analyzerSlice';
+import { setDataSources, setSelectedItems } from '../../../store/analyzerSlice';
 
 export default function AnalyzerData({columns, rows}) {
 
@@ -13,6 +13,10 @@ export default function AnalyzerData({columns, rows}) {
     setValItems(val);
     dispatch(setSelectedItems(val));
   };
+
+  useEffect(() => {
+    dispatch(setDataSources());
+  }, [])
 
   return (
     <div style={{ height: 400, width: '100%' }}>

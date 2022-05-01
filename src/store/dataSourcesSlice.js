@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const getDataSources = createAsyncThunk('/datasources', async () => {
-  const endpoint = 'datasources';
+  const endpoint = 'datasource';
   const url = baseUrl + endpoint;
   const response = await axios.get(url, headers);
   return response.data;

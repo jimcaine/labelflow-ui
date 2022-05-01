@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export const getLabelSets = createAsyncThunk('/labelsets', async () => {
-  const url = 'http://localhost:8000/labelsets';
+  const url = 'http://localhost:8000/labelset';
   const response = await axios.get(url, {
     headers: {"LFML-API-KEY": token},
   });

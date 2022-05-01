@@ -28,7 +28,7 @@ export default function FilterField({ filterId }) {
       onChange={(e) => handleChange(e) } >
     {dataSourceFields.map((dataSourceField) => (
       <MenuItem
-        key={dataSourceField.field_nm}
+        key={'filter_' + dataSourceField.field_nm}
         value={dataSourceField.field_nm}>
         {dataSourceField.field_nm}
       </MenuItem>

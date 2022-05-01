@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import 'react-tabulator/lib/styles.css'; // required styles
-import '../../styles/table.css'; // theme
-import { ReactTabulator } from 'react-tabulator';
-
 import { getAnalyzerData } from '../../store/analyzerSlice';
 
 import Container from '@mui/material/Container';
@@ -27,19 +23,19 @@ export default function Analyzer() {
   const analyzerSlice = useSelector((state) => state.analyzer);
   const dataRows = analyzerSlice.data.data.rows;
   const dataColumns = analyzerSlice.data.data.cols;
-  const filters = analyzerSlice.data.filters;
-  const selectedItems = analyzerSlice.data.selectedItems;
+  const dataSource = analyzerSlice.data.dataSource;
 
   const [activeLabel, setActiveLabel] = useState('');
 
   // click events
   const handleLoadDataClick = () => {
-    dispatch(getAnalyzerData(filters));
+    console.log(dataSource.id, []);
+    dispatch(getAnalyzerData(analyzerSlice));
   };
 
   return (
     <Container sx={{marginBottom: "100px"}}>
-      <Typography variant="h3">
+      <Typography variant="h1">
         Analyzer
       </Typography>
       <Button onClick={() => console.log(analyzerSlice)}>Log State</Button>

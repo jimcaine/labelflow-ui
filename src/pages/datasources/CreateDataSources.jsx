@@ -57,7 +57,7 @@ export default function UserSettings() {
 
   return (
     <div>
-      <Typography variant="h3">
+      <Typography variant="h1">
         <Box className={classes.title}>Create Data Source</Box>
       </Typography>
 

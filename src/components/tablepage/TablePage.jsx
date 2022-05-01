@@ -76,7 +76,7 @@ export default function TablePage(props) {
   // return
   return (
     <div>
-      <Typography variant="h3">
+      <Typography variant="h1">
         <Box className={classes.title}>{titleName}</Box>
       </Typography>
       <hr/>

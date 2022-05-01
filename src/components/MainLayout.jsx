@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
 import Container from "@mui/material/Container";
+import CssBaseline from '@mui/material/CssBaseline';
 import { makeStyles } from '@mui/styles';
 
 import AppBar from './AppBar';
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => {
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      zIndex: theme.zIndex.drawer + 1
     },
     subAppBar: {
       marginTop: theme.mixins.toolbar.minHeight,
@@ -23,6 +25,8 @@ const useStyles = makeStyles((theme) => {
     },
     contentContainer: {
       paddingTop: "40px",
+    },
+    drawer: {
     },
   })
 });
@@ -41,8 +45,9 @@ export default function MainLayout({ children }) {
   } else {
     return (
       <div className={classes.root}>
+        <CssBaseline />
         <AppBar className={classes.appBar} />
-        <Sidenav className={classes.drawer} />
+        <Sidenav className={classes.drawer}/>
         <div className={classes.subAppBar}>
           <Container className={classes.contentContainer}>
             { children }

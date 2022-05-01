@@ -40,7 +40,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Typography variant="h3" >
+      <Typography variant="h1" >
         <Box className={classes.title}>Dashboard</Box>
       </Typography>
       <Grid container>

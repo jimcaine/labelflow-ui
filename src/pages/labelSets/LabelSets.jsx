@@ -42,7 +42,7 @@ export default function LabelSets() {
 
   return (
     <div>
-      <Typography variant="h3">
+      <Typography variant="h1">
         <Box className={classes.title}>Label Sets</Box>
       </Typography>
       <hr/>

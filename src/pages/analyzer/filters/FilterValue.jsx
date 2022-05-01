@@ -7,10 +7,12 @@ import TextField from '@mui/material/TextField';
 export default function FilterValue({ filterId }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.analyzer.data.filters);
-  const dataSource = useSelector((state) => state.analyzer.data.dataSource);
   const filter = filters[filterId];
   const filterField = filter.field;
   const filterOperator = filter.operator;
+
+  const dataSource = useSelector((state) => state.analyzer.data.dataSource);
+  const filterType = dataSource.fields.filter((field) => field.field_nm === filterField)[0].type;
 
   const handleChange = (e) => {
     const filter = filters[filterId];
@@ -19,11 +21,24 @@ export default function FilterValue({ filterId }) {
     dispatch(setFilters(newFilters));
   };
 
-  const filterVls = dataSource.fields
-    .filter((ds) => ds.field_nm === filterField)[0].vls;
 
-  if (filterOperator === "=" && filterVls !== null) {
-
+  if (filterType === 'text') {
+    return (
+      <TextField
+        id="filter-vl"
+        variant="standard"
+        onChange={(e) => handleChange(e) } />
+    )
+  } else if (filterOperator === 'contains') {
+    return (
+      <TextField
+        id="filter-vl"
+        variant="standard"
+        onChange={(e) => handleChange(e) } />
+    )
+  } else if (filterType == 'categorical') {
+    const filterVls = dataSource.fields
+      .filter((ds) => ds.field_nm === filterField)[0].vls;
     return (
       <Select
         labelId="demo-simple-select-label"
@@ -35,13 +50,6 @@ export default function FilterValue({ filterId }) {
         <MenuItem key={vl} value={vl}>{vl}</MenuItem>
       ))}
       </Select>
-    )
-  } else if (filterOperator === 'contains') {
-    return (
-      <TextField
-        id="filter-vl"
-        variant="standard"
-        onChange={(e) => handleChange(e) } />
     )
   } else {
     return (

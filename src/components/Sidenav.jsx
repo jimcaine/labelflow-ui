@@ -20,7 +20,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import LabelIcon from '@mui/icons-material/Label';
 
-import LabelflowLogo from '../assets/labelflowLogo.png';
+import LabelflowLogo from '../assets/labelflowLogo2.png';
 
 const drawerWidth = 200;
 
@@ -128,7 +128,7 @@ export default function Sidenav() {
       variant="permanent"
       anchor="left" >
       
-      <div>
+      <div style={{textAlign: 'center', marginTop: "10px"}}>
         <img
           src={LabelflowLogo}
           alt="Labelflow Logo"
