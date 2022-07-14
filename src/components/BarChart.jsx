@@ -1,5 +1,5 @@
 import { BarChart as ReBarChart, Bar, XAxis, YAxis, CartesianGrid,
-         Tooltip, Legend } from 'recharts';
+         Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
   {
@@ -25,24 +25,27 @@ const data = [
 ];
 
 export default function BarChart() {
+
   return (
-    <ReBarChart
-      width={600}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="cnt" fill="primary" />
-    </ReBarChart>
+    <div style={{paddingTop: 30}}>
+      <ResponsiveContainer width="95%" height={250}>
+      <ReBarChart
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="date" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="cnt" fill="#00adb5" />
+      </ReBarChart>
+      </ResponsiveContainer>
+    </div>
   );
 };

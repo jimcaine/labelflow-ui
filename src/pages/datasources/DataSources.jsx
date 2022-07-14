@@ -10,7 +10,7 @@ export default function DataSources() {
   // define page constants
   const titleName = "Data Sources";
   const entityName = "Data Source";
-  const endpoint = "/datasources/";
+  const endpoint = "/datasource/";
   const columns = [
     {
       nm: "Data Source Name",

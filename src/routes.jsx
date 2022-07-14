@@ -6,8 +6,7 @@ import Analyzer from "./pages/analyzer/Analyzer";
 import DataSources from "./pages/datasources/DataSources";
 import CreateDataSources from "./pages/datasources/CreateDataSources";
 
-import DataSource from "./pages/DataSource";
-import DataSourceCreate from "./pages/DataSourceCreate";
+import DataSource from "./pages/datasources/DataSource";
 import Dashboard from "./pages/Dashboard";
 import UserSettings from "./pages/UserSettings";
 import LabelSets from "./pages/labelSets/LabelSets";
@@ -39,7 +38,7 @@ export const routes = [
     component: <DataSources />,
   },
   {
-    path: "/datasources/:source_name",
+    path: "/datasource/:source_name",
     authRequired: true,
     adminRequired: false,
     component: <DataSource />,

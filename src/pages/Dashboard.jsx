@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 
+import BarChart from '../components/BarChart';
+
 const useStyles = makeStyles((theme) => (
   {
     title: {
@@ -48,6 +50,7 @@ export default function Dashboard() {
         <Grid key={index} item xs={6} className={classes.widget}>
           <Paper xs={6} className={classes.widgetPaper}>
             {widget.name}
+            <BarChart />
           </Paper>
         </Grid>
         ))}
